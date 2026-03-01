@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
 import { Monitor, Users, FileCheck, School, Trophy, Building2, CheckCircle2 } from 'lucide-react';
-
+import whychooseimg from '../Assest/whychoseeus.png';
 export default function Services() {
   const services = [
     { icon: <Users size={32} />, title: "Offline Model Examinations", desc: "Large-scale real exam simulation across cities." },
@@ -66,9 +66,9 @@ export default function Services() {
               ))}
             </div>
           </div>
-          <div className="relative hidden lg:block">
+          <div className="relative hidden lg:block bg-white rounded-3xl overflow-hidden shadow-2xl border border-white/20">
             <img 
-              src="https://picsum.photos/seed/analytics/600/400" 
+              src={whychooseimg}
               alt="Detailed Performance Analytics" 
               className="rounded-2xl shadow-2xl border-4 border-white/20"
               referrerPolicy="no-referrer"

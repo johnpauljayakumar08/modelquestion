@@ -27,10 +27,10 @@ export default function Footer({ setActivePage }: FooterProps) {
             India’s leading provider of Competitive Exam Model Tests. Specialized in large-scale offline and online simulations.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-secondary transition-colors"><Facebook size={20} /></a>
-            <a href="#" className="hover:text-secondary transition-colors"><Instagram size={20} /></a>
+            <a href="https://www.facebook.com/profile.php?id=61587566011132" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors"><Facebook size={20} /></a>
+            <a href="https://www.instagram.com/ons_india_edu/" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors"><Instagram size={20} /></a>
             <a href="#" className="hover:text-secondary transition-colors"><Linkedin size={20} /></a>
-            <a href="#" className="hover:text-secondary transition-colors"><Youtube size={20} /></a>
+            <a href="https://www.youtube.com/@ONSINDIA-qx4or" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors"><Youtube size={20} /></a>
           </div>
         </div>
 
@@ -54,6 +54,7 @@ export default function Footer({ setActivePage }: FooterProps) {
               <MapPin size={18} className="text-secondary shrink-0" />
               <span>1st Floor, 7/21, Velachery – Tambaram Main Rd, Medavakkam, Chennai, Tamil Nadu – 600100</span>
             </li>
+            
             <li className="flex gap-3">
               <Phone size={18} className="text-secondary shrink-0" />
               <span>9500671950</span>

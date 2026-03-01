@@ -1,18 +1,40 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent,React } from 'react';
 import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Send, CheckCircle2 } from 'lucide-react';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    phone: '',
+    email: '',
+    city: '',
+    role: '',
+    message: ''
+  });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // In a real app, we'd send the data to a server
-    // For now, we'll just simulate a redirect or success
-    setSubmitted(true);
-    setTimeout(() => {
-      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSeIDl73q6Us4LuHE6-6AVDK27V14lPx02_z-hB3k6gOuRQW9g/viewform";
-    }, 2000);
+    try {
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await resp.json();
+      if (!resp.ok) {
+        throw new Error(result.message || 'Network response was not ok');
+      }
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 2000);
+    } catch (err) {
+      console.error('Contact submit error', err);
+      alert('Could not send message right now: ' + err.message);
+    }
   };
 
   return (
@@ -34,6 +56,7 @@ export default function Contact() {
           <div className="space-y-8">
             {[
               { icon: <MapPin size={24} />, title: "Head Office", desc: "1st Floor, 7/21, Velachery – Tambaram Main Rd, Medavakkam, Chennai, Tamil Nadu – 600100" },
+              // { icon: <MapPin size={24} />, title: "Branch Office", desc: "47/6, SAKTHI NAGAR WEST, Erode, Erode, Tamil Nadu, 638012" },
               { icon: <Phone size={24} />, title: "Phone Number", desc: "9500671950" },
               { icon: <Mail size={24} />, title: "Email Address", desc: "admin@modelquestions.com" }
             ].map((item, i) => (
@@ -70,28 +93,28 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Full Name *</label>
-                  <input required type="text" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="John Doe" />
+                  <input required name="fullName" type="text" value={formData.fullName} onChange={handleChange} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="John Doe" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Phone Number *</label>
-                  <input required type="tel" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="+91 98765 43210" />
+                  <input required name="phone" type="tel" value={formData.phone} onChange={handleChange} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="+91 98765 43210" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">Email Address *</label>
-                  <input required type="email" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="john@example.com" />
+                  <input required name="email" type="email" value={formData.email} onChange={handleChange} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="john@example.com" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-700">City *</label>
-                  <input required type="text" className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Coimbatore" />
+                  <input required name="city" type="text" value={formData.city} onChange={handleChange} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="Coimbatore" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Are You? *</label>
-                <select required className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all">
+                <select required name="role" value={formData.role} onChange={handleChange} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all">
                   <option value="">Select an option</option>
                   <option value="student">Student</option>
                   <option value="parent">Parent</option>
@@ -103,7 +126,14 @@ export default function Contact() {
 
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Message</label>
-                <textarea rows={4} className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all" placeholder="How can we help you?"></textarea>
+                <textarea
+                  rows={4}
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none transition-all"
+                  placeholder="How can we help you?"
+                ></textarea>
               </div>
 
               <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2 py-4">

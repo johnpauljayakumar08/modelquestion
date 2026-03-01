@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-
+import logo from '../Assest/onslogo.png';
 interface NavbarProps {
   activePage: string;
   setActivePage: (page: string) => void;
@@ -40,8 +40,8 @@ export default function Navbar({ activePage, setActivePage }: NavbarProps) {
           className="flex items-center gap-2 cursor-pointer group" 
           onClick={() => handleNavClick('home')}
         >
-          <div className="bg-primary p-2 rounded-lg text-white group-hover:scale-110 transition-transform">
-            <GraduationCap size={24} />
+          <div className="p-2 md:p-3 rounded-lg text-white group-hover:scale-110 transition-transform">
+            <img src={logo} alt="ModelQuestions.com Logo" className="w-10 h-10 md:w-22 md:h-22 object-contain" />
           </div>
           <span className={`font-bold text-xl tracking-tight ${scrolled ? 'text-slate-900' : 'text-slate-900'}`}>
             ModelQuestions<span className="text-secondary">.com</span>

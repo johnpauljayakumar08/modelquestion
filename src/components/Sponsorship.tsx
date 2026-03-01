@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { Check, Star, Trophy, Users, Megaphone, MapPin, Briefcase } from 'lucide-react';
 
-export default function Sponsorship() {
+export default function Sponsorship({ setActivePage }: { setActivePage: (page: string) => void }) {
   const tiers = [
     {
       name: "SILVER SPONSOR",
@@ -86,7 +86,10 @@ export default function Sponsorship() {
               ))}
             </ul>
 
-            <button className={`w-full py-4 rounded-xl text-white font-bold transition-transform active:scale-95 ${tier.btnColor}`}>
+            <button
+              onClick={() => setActivePage('contact')}
+              className={`w-full py-4 rounded-xl text-white font-bold transition-transform active:scale-95 ${tier.btnColor}`}
+            >
               Become a Sponsor Today
             </button>
           </motion.div>
