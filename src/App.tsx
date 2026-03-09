@@ -7,6 +7,8 @@ import Services from './components/Services';
 import TargetMBBS from './components/TargetMBBS';
 import Sponsorship from './components/Sponsorship';
 import Contact from './components/Contact';
+import Login from './components/Login';
+import AdminDashboard from './components/AdminDashboard';
 import { motion, AnimatePresence } from 'motion/react';
 
 export default function App() {
@@ -35,32 +37,38 @@ export default function App() {
     switch (activePage) {
       case 'home':
         setMeta(
-          'ModelQuestions.com – India’s Leading Student Assessment & Model Exam Platform',
-          'ModelQuestions.com conducts large-scale offline and online model exams for NEET, JEE, Government, Banking, TANCET & Board exams. Real exam experience with detailed performance analysis.',
+          'ONS India – India’s Leading Student Assessment & Model Exam Platform',
+          'ONS India conducts large-scale offline and online model exams for NEET, JEE, Government, Banking, TANCET & Board exams. Real exam experience with detailed performance analysis.',
           'student assessment platform India, NEET model exam, JEE mock test offline, competitive exam model test, school assessment India'
         );
         break;
       case 'target-mbbs':
         setMeta(
-          'TARGET MBBS 2026 – NEET Model Exam in Coimbatore | ModelQuestions.com',
+          'TARGET MBBS 2026 – NEET Model Exam in Coimbatore | ONS India',
           'Register for TARGET MBBS 2026 NEET Model Exam. Real exam environment, detailed analysis, rank report & subject-wise evaluation. Limited seats available.',
           'NEET model exam 2026, MBBS mock test Coimbatore, NEET practice exam offline, NEET assessment test'
         );
         break;
       case 'sponsorship':
         setMeta(
-          'Sponsor TARGET MBBS 2026 – Student Outreach Opportunity | ModelQuestions.com',
+          'Sponsor TARGET MBBS 2026 – Student Outreach Opportunity | ONS India',
           'Become a Gold or Silver Sponsor for TARGET MBBS 2026. Direct access to 40,000+ students & parents. Strong brand visibility & lead generation opportunity.',
           'education event sponsorship India, student outreach program Coimbatore, college branding opportunity, academic event sponsorship'
         );
         break;
       case 'contact':
-        setMeta('Contact – ModelQuestions.com', 'Get in touch with ModelQuestions.com for NCET model exams and sponsorship inquiries.', 'contact ModelQuestions, NEET model exam contact');
+        setMeta('Contact – ONS India', 'Get in touch with ONS India for NCET model exams and sponsorship inquiries.', 'contact ModelQuestions, NEET model exam contact');
         break;
       default:
         break;
     }
   }, [activePage]);
+
+  useEffect(() => {
+    if (window.location.pathname === '/onslogin') {
+      setActivePage('login');
+    }
+  }, []);
 
 
   // Simple page transition wrapper
@@ -120,6 +128,14 @@ export default function App() {
             </div>
           </PageWrapper>
         );
+      case 'login':
+        return <Login setActivePage={setActivePage} />;
+      case 'admin':
+        return (
+          <PageWrapper>
+            <AdminDashboard setActivePage={setActivePage} />
+          </PageWrapper>
+        );
       default:
         return <Hero setActivePage={setActivePage} />;
     }
@@ -127,7 +143,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar activePage={activePage} setActivePage={setActivePage} />
+      {/* hide navbar on login/admin pages */}
+      {activePage !== 'login' && activePage !== 'admin' && (
+        <Navbar activePage={activePage} setActivePage={setActivePage} />
+      )}
       
       <main className="flex-grow">
         <AnimatePresence mode="wait">

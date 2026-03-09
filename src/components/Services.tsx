@@ -56,7 +56,7 @@ export default function Services() {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 -skew-x-12 translate-x-1/4" />
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h3 className="text-3xl font-extrabold mb-8">Why Choose ModelQuestions.com?</h3>
+            <h3 className="text-3xl font-extrabold mb-8">Why Choose ONS India?</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {benefits.map((benefit, i) => (
                 <div key={i} className="flex items-start gap-3">

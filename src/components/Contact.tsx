@@ -20,7 +20,7 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const resp = await fetch('/api/contact', {
+      const resp = await fetch('https://onsindia.net/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -47,7 +47,7 @@ export default function Contact() {
         >
           <h2 className="text-primary font-bold tracking-wider uppercase text-sm mb-4">Contact Us</h2>
           <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">
-            Get in Touch with ModelQuestions.com
+            Get in Touch with ONS India
           </h3>
           <p className="text-slate-600 mb-12 leading-relaxed">
             Have questions about our model test programs or sponsorship opportunities? Our team is here to help you.
@@ -58,7 +58,7 @@ export default function Contact() {
               { icon: <MapPin size={24} />, title: "Head Office", desc: "1st Floor, 7/21, Velachery – Tambaram Main Rd, Medavakkam, Chennai, Tamil Nadu – 600100" },
               // { icon: <MapPin size={24} />, title: "Branch Office", desc: "47/6, SAKTHI NAGAR WEST, Erode, Erode, Tamil Nadu, 638012" },
               { icon: <Phone size={24} />, title: "Phone Number", desc: "9500671950" },
-              { icon: <Mail size={24} />, title: "Email Address", desc: "admin@modelquestions.com" }
+              { icon: <Mail size={24} />, title: "Email Address", desc: "infra@onsindia.net" }
             ].map((item, i) => (
               <div key={i} className="flex gap-6">
                 <div className="bg-primary/10 p-4 rounded-2xl text-primary shrink-0">

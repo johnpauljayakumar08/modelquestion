@@ -26,7 +26,7 @@ export default function TargetMBBS() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const resp = await fetch('/api/register', {
+      const resp = await fetch('https://onsindia.net/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -257,7 +257,7 @@ export default function TargetMBBS() {
                 </li>
                 <li className="flex gap-3 items-center">
                   <Mail size={18} className="text-secondary shrink-0" />
-                  <span>admin@modelquestions.com</span>
+                  <span>infra@onsindia.net</span>
                 </li>
               </ul>
             </div>

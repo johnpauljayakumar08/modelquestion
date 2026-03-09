@@ -16,12 +16,12 @@ export default function Footer({ setActivePage }: FooterProps) {
         {/* Brand */}
         <div className="space-y-6">
           <div className="flex items-center gap-2">
-            <div className="bg-primary p-2 rounded-lg text-white">
+            {/* <div className="bg-primary p-2 rounded-lg text-white">
               <GraduationCap size={24} />
             </div>
             <span className="font-bold text-xl tracking-tight text-white">
               ModelQuestions<span className="text-secondary">.com</span>
-            </span>
+            </span> */}
           </div>
           <p className="text-sm leading-relaxed">
             India’s leading provider of Competitive Exam Model Tests. Specialized in large-scale offline and online simulations.
@@ -61,7 +61,7 @@ export default function Footer({ setActivePage }: FooterProps) {
             </li>
             <li className="flex gap-3">
               <Mail size={18} className="text-secondary shrink-0" />
-              <span>admin@modelquestions.com</span>
+              <span>infra@onsindia.net</span>
             </li>
           </ul>
         </div>
@@ -84,7 +84,7 @@ export default function Footer({ setActivePage }: FooterProps) {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-xs">
-        <p>© 2026 ModelQuestions.com | A Group of ONS India | All Rights Reserved</p>
+        <p>© 2026 ONS India | A Group of ONS India | All Rights Reserved</p>
         <div className="flex gap-6">
           <a href="#" className="hover:text-white">Privacy Policy</a>
           <a href="#" className="hover:text-white">Terms of Service</a>

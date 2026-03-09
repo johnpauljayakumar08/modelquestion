@@ -8,7 +8,7 @@ interface HeroProps {
 
 export default function Hero({ setActivePage }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden mt-10">
       {/* Background Elements */}
       <div className="absolute top-0  right-0 w-1/2 h-full bg-primary/5 -skew-x-12 translate-x-1/4 z-0" />
       <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-secondary/5 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2 z-0" />

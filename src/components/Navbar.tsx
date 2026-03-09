@@ -41,11 +41,11 @@ export default function Navbar({ activePage, setActivePage }: NavbarProps) {
           onClick={() => handleNavClick('home')}
         >
           <div className="p-2 md:p-3 rounded-lg text-white group-hover:scale-110 transition-transform">
-            <img src={logo} alt="ModelQuestions.com Logo" className="w-10 h-10 md:w-22 md:h-22 object-contain" />
+            <img src={logo} alt="ONS India Logo" className="w-10 h-10 md:w-32 md:h-32 object-contain" />
           </div>
-          <span className={`font-bold text-xl tracking-tight ${scrolled ? 'text-slate-900' : 'text-slate-900'}`}>
+          {/* <span className={`font-bold text-xl tracking-tight ${scrolled ? 'text-slate-900' : 'text-slate-900'}`}>
             ModelQuestions<span className="text-secondary">.com</span>
-          </span>
+          </span> */}
         </div>
 
         {/* Desktop Nav */}

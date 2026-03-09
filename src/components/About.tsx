@@ -27,7 +27,7 @@ export default function About() {
             Leading Competitive Exam Model Tests Provider
           </h3>
           <p className="text-slate-600 mb-6 leading-relaxed">
-            ModelQuestions.com is a leading provider of Competitive Exam Model Tests operating under the ONS India Group. We specialize in designing and conducting large-scale offline and online model examinations that replicate real competitive exam environments.
+            ONS India is a leading provider of Competitive Exam Model Tests operating under the ONS India Group. We specialize in designing and conducting large-scale offline and online model examinations that replicate real competitive exam environments.
           </p>
           <p className="text-slate-600 mb-8 leading-relaxed">
             Our model tests empower students with real-time exam exposure and detailed subject-wise performance analysis, helping them build confidence for medical, engineering, and government exams.
