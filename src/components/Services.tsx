@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
-import { Monitor, Users, FileCheck, School, Trophy, Building2, CheckCircle2 } from 'lucide-react';
-import whychooseimg from '../Assest/whychoseeus.png';
-export default function Services() {
+import { Monitor, Users, FileCheck, School, Trophy, Building2, CheckCircle2, BookOpen } from 'lucide-react';
+import whychooseimg from '../Assest/whychoseeus.png';import { Link } from 'react-router-dom';export default function Services() {
   const services = [
     { icon: <Users size={32} />, title: "Offline Model Examinations", desc: "Large-scale real exam simulation across cities." },
     { icon: <Monitor size={32} />, title: "Online Model Test Platform", desc: "Structured digital exams with instant evaluation." },
     { icon: <FileCheck size={32} />, title: "Competitive Exam Model Tests", desc: "NEET, JEE, Banking, Government Exams, TANCET, CETs." },
     { icon: <School size={32} />, title: "School & Board Exam Model Tests", desc: "Structured school academic evaluation programs." },
     { icon: <Trophy size={32} />, title: "Scholarship & Olympiad Tests", desc: "Talent identification & performance benchmarking." },
-    { icon: <Building2 size={32} />, title: "Institutional Academic Initiatives", desc: "TARGET MBBS & city-level academic outreach events." }
+    { icon: <Building2 size={32} />, title: "Institutional Academic Initiatives", desc: "TARGET MBBS & city-level academic outreach events." },
+    { icon: <BookOpen size={32} />, title: "Learning Management System", desc: "Comprehensive online learning platform for college students with courses, assignments, and progress tracking." }
   ];
 
   const benefits = [
@@ -35,20 +35,38 @@ export default function Services() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
         {services.map((service, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white p-8 rounded-3xl border border-slate-200 hover:border-primary/30 hover:shadow-xl transition-all group"
-          >
-            <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
-              {service.icon}
-            </div>
-            <h4 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h4>
-            <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
-          </motion.div>
+          service.title === "Learning Management System" ? (
+            <Link key={i} to="/lms" className="block">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-8 rounded-3xl border border-slate-200 hover:border-primary/30 hover:shadow-xl transition-all group cursor-pointer"
+              >
+                <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
+                  {service.icon}
+                </div>
+                <h4 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h4>
+                <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+              </motion.div>
+            </Link>
+          ) : (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="bg-white p-8 rounded-3xl border border-slate-200 hover:border-primary/30 hover:shadow-xl transition-all group"
+            >
+              <div className="text-primary mb-6 group-hover:scale-110 transition-transform">
+                {service.icon}
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 mb-4">{service.title}</h4>
+              <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+            </motion.div>
+          )
         ))}
       </div>
 

@@ -1,14 +1,7 @@
 import { GraduationCap, Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  setActivePage: (page: string) => void;
-}
-
-export default function Footer({ setActivePage }: FooterProps) {
-  const handleNavClick = (id: string) => {
-    setActivePage(id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+export default function Footer() {
 
   return (
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8">
@@ -38,11 +31,14 @@ export default function Footer({ setActivePage }: FooterProps) {
         <div>
           <h4 className="text-white font-bold mb-6">Quick Links</h4>
           <ul className="space-y-4 text-sm">
-            <li><button onClick={() => handleNavClick('home')} className="hover:text-secondary transition-colors">Home</button></li>
-            <li><button onClick={() => handleNavClick('about')} className="hover:text-secondary transition-colors">About Us</button></li>
-            <li><button onClick={() => handleNavClick('target-mbbs')} className="hover:text-secondary transition-colors">TARGET MBBS 2026</button></li>
-            <li><button onClick={() => handleNavClick('sponsorship')} className="hover:text-secondary transition-colors">Sponsorship</button></li>
-            <li><button onClick={() => handleNavClick('contact')} className="hover:text-secondary transition-colors">Contact</button></li>
+            <li><Link to="/" className="hover:text-secondary transition-colors">Home</Link></li>
+            <li><Link to="/about" className="hover:text-secondary transition-colors">About Us</Link></li>
+            <li><Link to="/lms" className="hover:text-secondary transition-colors">LMS</Link></li>
+            <li><Link to="/target-mbbs" className="hover:text-secondary transition-colors">TARGET MBBS 2026</Link></li>
+            <li><Link to="/sponsorship" className="hover:text-secondary transition-colors">Sponsorship</Link></li>
+            <li><Link to="/contact" className="hover:text-secondary transition-colors">Contact</Link></li>
+            <li><Link to="/terms" className="hover:text-secondary transition-colors">Terms & Conditions</Link></li>
+            <li><Link to="/privacy-policy" className="hover:text-secondary transition-colors">Privacy Policy</Link></li>
           </ul>
         </div>
 
@@ -86,8 +82,8 @@ export default function Footer({ setActivePage }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-xs">
         <p>© 2026 ONS India | A Group of ONS India | All Rights Reserved</p>
         <div className="flex gap-6">
-          <a href="#" className="hover:text-white">Privacy Policy</a>
-          <a href="#" className="hover:text-white">Terms of Service</a>
+          <Link to="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-white">Terms of Service</Link>
         </div>
       </div>
     </footer>

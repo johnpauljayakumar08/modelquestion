@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as XLSX from 'xlsx';
-
-interface AdminDashboardProps {
-  setActivePage: (page: string) => void;
-}
 
 interface Registration {
   id: number;
@@ -30,7 +27,8 @@ interface Contact {
   created_at: string;
 }
 
-export default function AdminDashboard({ setActivePage }: AdminDashboardProps) {
+export default function AdminDashboard() {
+  const navigate = useNavigate();
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [activeTab, setActiveTab] = useState<'registrations' | 'contacts'>('registrations');
@@ -104,7 +102,7 @@ export default function AdminDashboard({ setActivePage }: AdminDashboardProps) {
   };
 
   const handleLogout = () => {
-    setActivePage('home');
+    navigate('/');
   };
 
   if (loading) return <div className="pt-24 text-center">Loading...</div>;

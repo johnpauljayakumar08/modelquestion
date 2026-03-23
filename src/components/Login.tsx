@@ -1,10 +1,8 @@
 import { useState,React } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-interface LoginProps {
-  setActivePage: (page: string) => void;
-}
-
-export default function Login({ setActivePage }: LoginProps) {
+export default function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,7 +20,7 @@ export default function Login({ setActivePage }: LoginProps) {
       });
       const data = await response.json();
       if (data.success) {
-        setActivePage('admin');
+        navigate('/admin');
       } else {
         setError(data.message || 'Login failed');
       }

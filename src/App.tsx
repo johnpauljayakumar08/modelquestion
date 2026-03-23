@@ -1,4 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
@@ -7,11 +8,23 @@ import Services from './components/Services';
 import TargetMBBS from './components/TargetMBBS';
 import Sponsorship from './components/Sponsorship';
 import Contact from './components/Contact';
+import TermsAndConditions from './components/TermsAndConditions';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import Login from './components/Login';
 import AdminDashboard from './components/AdminDashboard';
+import LMS from './components/LMS';
 import { motion, AnimatePresence } from 'motion/react';
 
-export default function App() {
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
   const [activePage, setActivePage] = useState('home');
 
   // update document title and meta tags whenever page changes
@@ -32,6 +45,18 @@ export default function App() {
     }
     key.setAttribute('content', keywords);
   };
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === '/') setActivePage('home');
+    else if (path === '/about') setActivePage('about');
+    else if (path === '/target-mbbs') setActivePage('target-mbbs');
+    else if (path === '/sponsorship') setActivePage('sponsorship');
+    else if (path === '/contact') setActivePage('contact');
+    else if (path === '/lms') setActivePage('lms');
+    else if (path === '/onslogin') setActivePage('login');
+    else if (path === '/admin') setActivePage('admin');
+  }, [location.pathname]);
 
   useEffect(() => {
     switch (activePage) {
@@ -59,17 +84,13 @@ export default function App() {
       case 'contact':
         setMeta('Contact – ONS India', 'Get in touch with ONS India for NCET model exams and sponsorship inquiries.', 'contact ModelQuestions, NEET model exam contact');
         break;
+      case 'lms':
+        setMeta('Learning Management System – ONS India', 'Comprehensive online learning platform for college students with AI-based video recommendations, detailed performance reports, and interactive courses.', 'LMS college students, online learning platform, AI video recommendations, performance analytics');
+        break;
       default:
         break;
     }
   }, [activePage]);
-
-  useEffect(() => {
-    if (window.location.pathname === '/onslogin') {
-      setActivePage('login');
-    }
-  }, []);
-
 
   // Simple page transition wrapper
   const PageWrapper = ({ children }: { children: ReactNode }) => (
@@ -83,78 +104,88 @@ export default function App() {
     </motion.div>
   );
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'home':
-        return (
-          <PageWrapper>
-              <Hero setActivePage={setActivePage} />
-            <About />
-            <Services />
-            <TargetMBBS />
-            <Sponsorship setActivePage={setActivePage} />
-            <Contact />
-          </PageWrapper>
-        );
-      case 'about':
-        return (
-          <PageWrapper>
-            <div className="pt-24">
-              <About />
-            </div>
-          </PageWrapper>
-        );
-      case 'target-mbbs':
-        return (
-          <PageWrapper>
-            <div className="pt-24">
-              <TargetMBBS />
-            </div>
-          </PageWrapper>
-        );
-      case 'sponsorship':
-        return (
-          <PageWrapper>
-              <div className="pt-24">
-              <Sponsorship setActivePage={setActivePage} />
-            </div>
-          </PageWrapper>
-        );
-      case 'contact':
-        return (
-          <PageWrapper>
-            <div className="pt-24">
-              <Contact />
-            </div>
-          </PageWrapper>
-        );
-      case 'login':
-        return <Login setActivePage={setActivePage} />;
-      case 'admin':
-        return (
-          <PageWrapper>
-            <AdminDashboard setActivePage={setActivePage} />
-          </PageWrapper>
-        );
-      default:
-        return <Hero setActivePage={setActivePage} />;
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       {/* hide navbar on login/admin pages */}
       {activePage !== 'login' && activePage !== 'admin' && (
-        <Navbar activePage={activePage} setActivePage={setActivePage} />
+        <Navbar />
       )}
-      
+
       <main className="flex-grow">
         <AnimatePresence mode="wait">
-          {renderPage()}
+          <Routes>
+            <Route path="/" element={
+              <PageWrapper>
+                <Hero />
+                <About />
+                <Services />
+                <TargetMBBS />
+                <Sponsorship />
+                <Contact />
+              </PageWrapper>
+            } />
+            <Route path="/about" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <About />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/target-mbbs" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <TargetMBBS />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/sponsorship" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <Sponsorship />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/contact" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <Contact />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/lms" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <LMS />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/terms" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <TermsAndConditions />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/privacy-policy" element={
+              <PageWrapper>
+                <div className="pt-24">
+                  <PrivacyPolicy />
+                </div>
+              </PageWrapper>
+            } />
+            <Route path="/onslogin" element={<Login />} />
+            <Route path="/admin" element={
+              <PageWrapper>
+                <AdminDashboard />
+              </PageWrapper>
+            } />
+          </Routes>
         </AnimatePresence>
       </main>
 
-      <Footer setActivePage={setActivePage} />
+      <Footer />
     </div>
   );
 }
+
+export default App;

@@ -1,12 +1,11 @@
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import bannrimg from '../Assest/banner.jpg';
 
-interface HeroProps {
-  setActivePage: (page: string) => void;
-}
+export default function Hero() {
+  const navigate = useNavigate();
 
-export default function Hero({ setActivePage }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden mt-10">
       {/* Background Elements */}
@@ -41,14 +40,14 @@ export default function Hero({ setActivePage }: HeroProps) {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <button 
-              onClick={() => setActivePage('target-mbbs')}
+              onClick={() => navigate('/target-mbbs')}
               className="btn-primary flex items-center justify-center gap-2 group"
             >
               Register for TARGET MBBS 2026
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
-              onClick={() => setActivePage('sponsorship')}
+              onClick={() => navigate('/sponsorship')}
               className="btn-secondary flex items-center justify-center gap-2"
             >
               Become a Sponsor

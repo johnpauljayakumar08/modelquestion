@@ -1,7 +1,9 @@
 import { motion } from 'motion/react';
 import { Check, Star, Trophy, Users, Megaphone, MapPin, Briefcase } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
-export default function Sponsorship({ setActivePage }: { setActivePage: (page: string) => void }) {
+export default function Sponsorship() {
+  const navigate = useNavigate();
   const tiers = [
     {
       name: "SILVER SPONSOR",
@@ -87,7 +89,7 @@ export default function Sponsorship({ setActivePage }: { setActivePage: (page: s
             </ul>
 
             <button
-              onClick={() => setActivePage('contact')}
+              onClick={() => navigate('/contact')}
               className={`w-full py-4 rounded-xl text-white font-bold transition-transform active:scale-95 ${tier.btnColor}`}
             >
               Become a Sponsor Today
